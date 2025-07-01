@@ -1,9 +1,9 @@
 // 8. Home.tsx
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Membership from '../components/Membership';
-import Gallery from '../components/Gallery';
-import Contact from '../components/Contact';
+// import Membership from '../components/Membership';
+// import Gallery from '../components/Gallery';
+// import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
 const Home = () => (
@@ -18,3 +18,4 @@ const Home = () => (
 );
 
 export default Home;
+//hello

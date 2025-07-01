@@ -3,7 +3,6 @@ import roundBuilding from "../assets/round building.jpg"
 import  bridge from "../assets/bridge.png"
 import camel from "../assets/bridge.png"
 import skybuilding from "../assets/sky building.jpg"
-import sea from "../assets/sea building.jpg"
 
 const imageCards = [
   {
