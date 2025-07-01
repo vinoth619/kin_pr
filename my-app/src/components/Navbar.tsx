@@ -1,54 +1,63 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import kinLogo from "../assets/shared image.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen((prev) => !prev);
+  const { pathname } = useLocation(); // to highlight active link
 
   const navLinks = [
-    { label: "HOME", path: "/" },
-    { label: "ABOUT", path: "/about" },
-    { label: "KINUAEMEMBERSHIP", path: "/membership" },
-    { label: "GALLERY", path: "/gallery" },
-    { label: "CONTACT", path: "/contact" },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Membership", path: "/membership" },
+    { label: "Gallery", path: "/gallery" },
+    { label: "Contact", path: "/contact" },
   ];
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+      className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400 shadow-lg"
       initial={{ y: -50 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="flex justify-between items-center px-4 py-3">
-        {/* Logo & Contact */}
+      <div className="flex items-center justify-between px-6 py-4">
+        {/* Logo + Info */}
         <div className="flex items-center gap-4">
           <img
-            src="/logo.png"
+            src={kinLogo}
             alt="KIN Logo"
-            className="w-12 h-12 object-cover rounded-full"
+            className="w-20 h-20 object-cover rounded-full shadow-md"
           />
-          <div className="text-sm font-semibold text-gray-800 hidden sm:block">
-            <p>📞 +971 52 652 2777</p>
-            <p className="text-blue-500">🌐 kinuae.com</p>
+          <div className="hidden sm:block text-sm text-white leading-tight">
+            <p className="font-semibold">📞 +971 52 652 2777</p>
+            <p className="text-yellow-100 font-semibold">🌐 kinuae.com</p>
           </div>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 font-medium text-gray-700">
+        <div className="hidden md:flex items-center gap-6 text-white font-semibold">
           {navLinks.map((link) => (
-            <Link key={link.path} to={link.path} className="hover:underline">
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                pathname === link.path
+                  ? "bg-white text-red-600 shadow-md"
+                  : "hover:bg-white/20 hover:text-yellow-100"
+              }`}
+            >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* Mobile Hamburger */}
-        <button className="md:hidden" onClick={toggleMenu}>
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile Toggle */}
+        <button onClick={toggleMenu} className="md:hidden text-white">
+          {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
       </div>
 
@@ -56,18 +65,22 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden flex flex-col bg-white shadow-md px-4 py-2"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="md:hidden px-6 py-4 space-y-4 bg-gradient-to-br from-yellow-400 via-red-500 to-yellow-400 border-t-4 border-red-600 shadow-xl rounded-b-xl"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -10, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           >
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="py-2 text-red-700 border-b"
                 onClick={() => setIsOpen(false)}
+                className={`block text-center font-bold text-lg px-4 py-2 rounded-md transition duration-300 ${
+                  pathname === link.path
+                    ? "bg-white text-red-600 shadow-md"
+                    : "bg-white/10 text-white hover:bg-white/20 hover:text-yellow-100"
+                }`}
               >
                 {link.label}
               </Link>

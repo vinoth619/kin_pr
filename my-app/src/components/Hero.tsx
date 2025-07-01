@@ -1,24 +1,31 @@
 // src/components/Hero.tsx
 import { motion } from "framer-motion";
+import roundbuilding from "../assets/round building.jpg"; // make sure the image exists and the name is exact
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-800 to-gray-900 text-white min-h-screen flex flex-col justify-center items-center relative">
-      <div className=" top-0 w-full bg-yellow-400 py-4 text-center text-3xl font-bold text-red-700 z-10">
-        KARNATAKA INTERNATIONAL NETWORK – UAE
-      </div>
+    <div className="relative min-h-screen flex flex-col justify-center items-center text-white overflow-hidden">
+      {/* Background Image */}
+      <img
+        src={roundbuilding}
+        alt="Round Building"
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+      />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 -z-10" />
 
+      {/* Foreground Content */}
       <motion.h1
-        className="text-4xl md:text-6xl font-bold text-center mt-24"
+        className="text-4xl md:text-6xl font-bold text-center mt-24 px-4"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        CONNECTING WITH  KIN
+        KARNATAKA INTERNATIONAL NETWORK
       </motion.h1>
 
       <motion.p
-        className="text-lg md:text-xl text-center text-gray-200 mt-4 max-w-xl"
+        className="text-lg md:text-xl text-center text-gray-200 mt-4 max-w-xl px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
@@ -32,14 +39,6 @@ const Hero = () => {
       >
         GET STARTED
       </motion.button>
-
-      <div className="absolute bottom-0 w-full flex justify-center p-8 text-white">
-        <div className="flex gap-10 text-lg font-semibold">
-          <span>ABOUT</span>
-          <span>MEMBERSHIP</span>
-          <span>GALLERY</span>
-        </div>
-      </div>
     </div>
   );
 };
